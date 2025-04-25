@@ -15,6 +15,13 @@ npm install express dotenv > /dev/null
 npm install --save-dev nodemon > /dev/null
 npm install prisma @prisma/client pg > /dev/null
 
+# Instalar socket.io si se elige arquitectura con sockets
+if [[ "$architecture" == "socket" || "$architecture" == "both" ]]; then
+    echo "📦 Instalando Socket.IO..."
+    npm install socket.io > /dev/null
+fi
+
+
 # 4. ¿HTTP, Socket.IO o ambos?
 echo "⚙️ ¿Qué arquitectura quieres usar?"
 select arch in "HTTP (REST)" "Socket.IO" "Ambos"; do
