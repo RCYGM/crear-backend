@@ -335,3 +335,28 @@ this.scripts = {
 # 12. Mensaje final y abrir VSCode
 echo "✅ Proyecto $project_name creado con éxito con arquitectura '$architecture'"
 code .
+
+# 13. Preguntar si desea inicializar un repositorio Git
+read -p "📦 ¿Quieres inicializar este proyecto como repositorio Git? (s/n): " init_git
+
+if [[ "$init_git" == "s" || "$init_git" == "S" ]]; then
+  git init
+  git add .
+  git commit -m "🚀 Proyecto backend inicializado automáticamente"
+  echo "✅ Git inicializado y primer commit realizado."
+
+  # Preguntar si desea conectar con GitHub
+  read -p "🌐 ¿Quieres conectar este repositorio a GitHub y hacer push ahora? (s/n): " push_github
+
+  if [[ "$push_github" == "s" || "$push_github" == "S" ]]; then
+    read -p "🔗 Pega aquí la URL de tu repositorio GitHub (ej. https://github.com/usuario/repositorio.git): " repo_url
+    git remote add origin "$repo_url"
+    git branch -M main
+    git push -u origin main
+    echo "🚀 Proyecto subido exitosamente a GitHub: $repo_url"
+  else
+    echo "🛑 Proyecto Git creado localmente. Puedes conectar con GitHub más tarde."
+  fi
+else
+  echo "🛑 Git no fue inicializado. Puedes hacerlo manualmente más tarde si lo deseas."
+fi
